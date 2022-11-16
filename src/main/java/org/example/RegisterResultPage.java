@@ -8,7 +8,7 @@ import java.time.Duration;
 public class RegisterResultPage extends Utils
 {
     // Assign locators to private variables
-    private String _RegistrationSuccessfulMessage = "result";
+    private String _RegistrationSuccessfulMessage_ClassName = "result";
 
     public void verifyUserHasBeenRegisteredSuccessfully()
     {
@@ -16,7 +16,7 @@ public class RegisterResultPage extends Utils
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         // Retrieve the registration successful message
-        String strMessage = driver.findElement(By.className(_RegistrationSuccessfulMessage)).getText();
+        String strMessage = getTextFromElement(By.className(_RegistrationSuccessfulMessage_ClassName));
         System.out.println(strMessage);
 
         // Ensure the retrieved message is the successful one

@@ -30,9 +30,9 @@ public class Utils extends BasePage
     }
 
     // Get text from element
-    public static void getTextFromElement(By by)
+    public static String getTextFromElement(By by)
     {
-        driver.findElement(by).getText();
+        return driver.findElement(by).getText();
     }
 
     // Get Time stamp from System
@@ -63,23 +63,23 @@ public class Utils extends BasePage
     }
 
     // Select from dropdown using visible text
-    public static void selectFromDropdownByVisibleText(By by, String strElement, String strText)
+    public static void selectFromDropdownByVisibleText(By by, String strText)
     {
-        Select objSelect = new Select(driver.findElement(by.name(strElement)));
+        Select objSelect = new Select(driver.findElement(by));
         objSelect.selectByVisibleText(strText);
     }
 
     // Select from dropdown using value
-    public static void selectFromDropdownByValue(By by, String strElement, String strValue)
+    public static void selectFromDropdownByValue(By by, String strValue)
     {
-        Select objSelect = new Select(driver.findElement(by.name(strElement)));
+        Select objSelect = new Select(driver.findElement(by));
         objSelect.selectByValue(strValue);
     }
 
     // Select from dropdown using index
-    public static void selectFromDropdownByIndex(By by, String strElement, int iIndex)
+    public static void selectFromDropdownByIndex(By by, int iIndex)
     {
-        Select objSelect = new Select(driver.findElement(by.name(strElement)));
+        Select objSelect = new Select(driver.findElement(by));
         objSelect.selectByIndex(iIndex);
     }
 

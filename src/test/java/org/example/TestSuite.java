@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 public class TestSuite extends BaseTest
 {
     // Create objects to be used for corresponding pages
+    HomePage objHomePage = new HomePage();
     RegisterPage objRegisterPage = new RegisterPage();
     RegisterResultPage objRegisterResultPage = new RegisterResultPage();
 
@@ -12,15 +13,15 @@ public class TestSuite extends BaseTest
     public void toVerifyUserIsAbleToRegister()
     {
         // Click on Register button, present on the Homepage
-        objRegisterPage.clickOnRegisterButton();
+        objHomePage.clickOnRegisterButton();
 
-        // Confirm the Registration page URL is correct
+        // Confirm the driver navigated to the correct page
         objRegisterPage.verifyUserIsOnRegisterPage();
 
-        // Type/ select the Registration details in the web form
+        // Input the Registration details in the web form
         objRegisterPage.enterRegistrationDetails();
 
-        // Verify the user has been successfully registered
+        // Verify if the user has been registered successfully
         objRegisterResultPage.verifyUserHasBeenRegisteredSuccessfully();
     }
 }

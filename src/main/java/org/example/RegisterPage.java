@@ -1,27 +1,22 @@
 package org.example;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class RegisterPage extends Utils
 {
     // Assign locators to private variables
-    private String _RegisterButtonClassName = "ico-register";
-    private String _GenderMaleId = "gender-male";
-    private String _FirstNameId = "FirstName";
-    private String _LastNameId = "LastName";
-    private String _DOBDayId = "DateOfBirthDay";
-    private String _DOBMonthId = "DateOfBirthMonth";
-    private String _DOBYearId = "DateOfBirthYear";
-    private String _EmailIdId = "Email";
-    private String _CompanyId = "Company";
-    private String _PasswordID = "Password";
-    private String _ConfirmPasswordID = "ConfirmPassword";
-    private String _RegisterButtonId = "register-button";
+    private String _GenderMale_Id = "gender-male";
+    private String _FirstName_Id = "FirstName";
+    private String _LastName_Id = "LastName";
+    private String _DOBDay_Id = "DateOfBirthDay";
+    private String _DOBMonth_Id = "DateOfBirthMonth";
+    private String _DOBYear_Id = "DateOfBirthYear";
+    private String _EmailId_Id = "Email";
+    private String _Company_Id = "Company";
+    private String _Password_Id = "Password";
+    private String _ConfirmPassword_Id = "ConfirmPassword";
+    private String _RegisterButton_Id = "register-button";
 
 
     // Test Data
@@ -37,12 +32,6 @@ public class RegisterPage extends Utils
 
 
 
-    public void clickOnRegisterButton()
-    {
-        // Click on Register button
-        driver.findElement(By.className(_RegisterButtonClassName)).click();
-    }
-
     public void verifyUserIsOnRegisterPage()
     {
         // Ensure driver has navigated to the correct page
@@ -53,42 +42,39 @@ public class RegisterPage extends Utils
     public void enterRegistrationDetails()
     {
         // Click the Male gender button
-        driver.findElement(By.id(_GenderMaleId)).click();
+        clickOnElement(By.id(_GenderMale_Id));
 
         // Type the first name
-        driver.findElement(By.id(_FirstNameId)).sendKeys(strDataFirstName);
+        typeText(By.id(_FirstName_Id), strDataFirstName);
 
         // Type the last name
-        driver.findElement(By.id(_LastNameId)).sendKeys(strDataLastName);
+        typeText(By.id(_LastName_Id), strDataLastName);
 
         // Select day for DOB
-        Select objSelect = new Select(driver.findElement(By.name(_DOBDayId)));
-        objSelect.selectByValue(strDataDOBDay);
+        selectFromDropdownByValue(By.name(_DOBDay_Id), strDataDOBDay);
 
         // Select Month for DOB
-        objSelect = new Select(driver.findElement(By.name(_DOBMonthId)));
-        objSelect.selectByValue(strDataDOBMonth);
+        selectFromDropdownByValue(By.name(_DOBMonth_Id), strDataDOBMonth);
 
         // select Year for DOB
-        objSelect = new Select(driver.findElement(By.name(_DOBYearId)));
-        objSelect.selectByValue(strDataDOBYear);
+        selectFromDropdownByValue(By.name(_DOBYear_Id), strDataDOBYear);
 
         // Type the email
-        String strTempEmail = strDataFirstName + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmssSSS")) + strDataEmailSuffix;
+        String strTempEmail = strDataFirstName + getTimeStamp() + strDataEmailSuffix;
         System.out.println(strTempEmail);
-        driver.findElement(By.id(_EmailIdId)).sendKeys(strTempEmail);
+        typeText(By.id(_EmailId_Id), strTempEmail);
 
         // Type the company name
-        driver.findElement(By.id(_CompanyId)).sendKeys(strDataCompanyName);
+        typeText(By.id(_Company_Id), strDataCompanyName);
 
         // Type Password
-        driver.findElement(By.id(_PasswordID)).sendKeys(strDataPassword);
+        typeText(By.id(_Password_Id), strDataPassword);
 
         // Type in confirm password
-        driver.findElement(By.id(_ConfirmPasswordID)).sendKeys(strDataConfirmPassword);
+        typeText(By.id(_ConfirmPassword_Id), strDataConfirmPassword);
 
         // Click on Register button
-        driver.findElement(By.id(_RegisterButtonId)).click();
+        clickOnElement(By.id(_RegisterButton_Id));
     }
 
 }
