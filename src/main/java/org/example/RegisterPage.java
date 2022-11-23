@@ -6,17 +6,19 @@ import org.testng.Assert;
 public class RegisterPage extends Utils
 {
     // Assign locators to private variables
-    private String _GenderMale_Id = "gender-male";
-    private String _FirstName_Id = "FirstName";
-    private String _LastName_Id = "LastName";
-    private String _DOBDay_Id = "DateOfBirthDay";
-    private String _DOBMonth_Id = "DateOfBirthMonth";
-    private String _DOBYear_Id = "DateOfBirthYear";
-    private String _EmailId_Id = "Email";
-    private String _Company_Id = "Company";
-    private String _Password_Id = "Password";
-    private String _ConfirmPassword_Id = "ConfirmPassword";
-    private String _RegisterButton_Id = "register-button";
+    private By _GenderMale_Id = By.id("gender-male");
+    private By _FirstName_Id = By.id("FirstName");
+    private By _LastName_Id = By.id("LastName");
+    private By _DOBDay_Name = By.name("DateOfBirthDay");
+    private By _DOBMonth_Name = By.name("DateOfBirthMonth");
+    private By _DOBYear_Name = By.name("DateOfBirthYear");
+    private By _EmailId_Id = By.id("Email");
+    private By _Company_Id = By.id("Company");
+    private By _Password_Id = By.id("Password");
+    private By _ConfirmPassword_Id = By.id("ConfirmPassword");
+    private By _RegisterButton_Id = By.id("register-button");
+    private By _ContinueButton_X = By.xpath("//a [@class='button-1 register-continue-button']");
+
 
 
     // Test Data
@@ -42,39 +44,44 @@ public class RegisterPage extends Utils
     public void enterRegistrationDetails()
     {
         // Click the Male gender button
-        clickOnElement(By.id(_GenderMale_Id));
+        clickOnElement(_GenderMale_Id);
 
         // Type the first name
-        typeText(By.id(_FirstName_Id), strDataFirstName);
+        typeText(_FirstName_Id, strDataFirstName);
 
         // Type the last name
-        typeText(By.id(_LastName_Id), strDataLastName);
+        typeText(_LastName_Id, strDataLastName);
 
         // Select day for DOB
-        selectFromDropdownByValue(By.name(_DOBDay_Id), strDataDOBDay);
+        selectFromDropdownByValue(_DOBDay_Name, strDataDOBDay);
 
         // Select Month for DOB
-        selectFromDropdownByValue(By.name(_DOBMonth_Id), strDataDOBMonth);
+        selectFromDropdownByValue(_DOBMonth_Name, strDataDOBMonth);
 
         // select Year for DOB
-        selectFromDropdownByValue(By.name(_DOBYear_Id), strDataDOBYear);
+        selectFromDropdownByValue(_DOBYear_Name, strDataDOBYear);
 
         // Type the email
         String strTempEmail = strDataFirstName + getTimeStamp() + strDataEmailSuffix;
         System.out.println(strTempEmail);
-        typeText(By.id(_EmailId_Id), strTempEmail);
+        typeText(_EmailId_Id, strTempEmail);
 
         // Type the company name
-        typeText(By.id(_Company_Id), strDataCompanyName);
+        typeText(_Company_Id, strDataCompanyName);
 
         // Type Password
-        typeText(By.id(_Password_Id), strDataPassword);
+        typeText(_Password_Id, strDataPassword);
 
         // Type in confirm password
-        typeText(By.id(_ConfirmPassword_Id), strDataConfirmPassword);
+        typeText(_ConfirmPassword_Id, strDataConfirmPassword);
 
         // Click on Register button
-        clickOnElement(By.id(_RegisterButton_Id));
+        clickOnElement(_RegisterButton_Id);
+    }
+
+    public void clickOnContinueButtonAfterSuccessfulRegistration()
+    {
+        clickOnElement(_ContinueButton_X);
     }
 
 }
