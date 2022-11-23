@@ -8,10 +8,16 @@ public class DriverManager extends Utils
     {
         // Provide the location of the chromedriver.exe file
         System.setProperty("webdriver.chrome.driver", "src/test/Drivers/chromedriver.exe");
+
         // Instantiate driver object to Chrome Driver
         driver = new ChromeDriver();
+
         // Maximise the browser window
         driver.manage().window().maximize();
+
+        // Clear all cookies
+        driver.manage().deleteAllCookies();
+
         // Open this URL
         driver.get("https://demo.nopcommerce.com/");
     }
