@@ -1,13 +1,19 @@
 package org.example;
 
-import org.openqa.selenium.By;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Set;
 
 public class Utils extends BasePage
 {
@@ -35,10 +41,21 @@ public class Utils extends BasePage
         return driver.findElement(by).getText();
     }
 
+    // Get similar web elements
+    public static List<WebElement> getAllElementsMatchingThisLocator(By by)
+    {
+        return driver.findElements(by);
+    }
+
     // Get Time stamp from System
     public static String getTimeStamp()
     {
         return LocalTime.now().format(DateTimeFormatter.ofPattern("HHmmssSSS"));
+    }
+
+    public static String getDateStamp()
+    {
+        return ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd.MMM.yyyy"));
     }
 
     // Explicit Wait - for the element to be clickable
@@ -81,6 +98,62 @@ public class Utils extends BasePage
     {
         Select objSelect = new Select(driver.findElement(by));
         objSelect.selectByIndex(iIndex);
+    }
+
+    public static List<WebElement> getAllElementsFromDropdown(By by)
+    {
+        Select objSelect = new Select(driver.findElement(by));
+         return objSelect.getOptions();
+    }
+
+    public static void acceptAlert()
+    {
+        driver.switchTo().alert().accept();
+    }
+
+    public static void dismissAlert()
+    {
+        driver.switchTo().alert().dismiss();
+    }
+
+    public static String getTextFromAlert()
+    {
+       return driver.switchTo().alert().getText();
+    }
+
+    public static void typeTextToAlert(String string)
+    {
+        driver.switchTo().alert().sendKeys(string);
+    }
+
+    public static String getWindowHandle()
+    {
+        return driver.getWindowHandle();
+    }
+
+    public static Set<String> getWindowHandles()
+    {
+        return driver.getWindowHandles();
+    }
+
+    public static void captureScreenshot(String strFileName)
+    {
+        // Convert web driver object to take screenshots
+        TakesScreenshot scrShot = (TakesScreenshot) driver;
+
+        // Create Image file
+        File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
+
+        File destFile = new File("src/test/ScreenShots/"+ strFileName + "_" + getDateStamp() + "_" + getTimeStamp() + ".jpg");
+
+        // Copy source file to destination path
+        try
+        {
+            FileUtils.copyFile(srcFile, destFile);
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
 }
