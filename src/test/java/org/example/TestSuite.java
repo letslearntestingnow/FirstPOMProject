@@ -163,8 +163,21 @@ public class TestSuite extends BaseTest
         objElectronicsPage.clickOnCameraButton();
         // Print names of all the products
         objCameraPhotoPage.printProductNames();
-
     }
+
+    @Test
+    public void toVerifyEachProductHasAddToCartButton()
+    {
+        // Land on Homepage
+
+        // Navigate to Electronics page
+        objHomePage.clickOnElectronicsButton();
+        // Navigate to Camera & Photo page
+        objElectronicsPage.clickOnCameraButton();
+        // Check all products for add to cart button and print if the button is missing
+        objCameraPhotoPage.checkProductsForAddToCartButton();
+    }
+
     @Test
     public void toVerifyUserIsAbleToRegister()
     {
